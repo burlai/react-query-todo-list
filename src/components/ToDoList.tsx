@@ -5,10 +5,10 @@ import { FormGroup } from "@mui/material";
 import { ToDoItem } from "./ToDoItem";
 import { deleteTodo, fetchTodos } from "../data/api";
 
-type TodoType = {
+// Defining the type of the data returned from the server (React Query)
+type ReactQueryTodoType = {
   id: number;
   todo: string;
-  isDeleted: boolean;
   completed: boolean;
 };
 
@@ -32,7 +32,9 @@ export const TodoList = () => {
       if (res.status === 200) {
         // When deletion on server is successful, we need to update our local state
         setTodosData([
-          ...todosData.filter((toDo: TodoType) => toDo.id !== res.data.id),
+          ...todosData.filter(
+            (toDo: ReactQueryTodoType) => toDo.id !== res.data.id
+          ),
         ]);
       }
     },
@@ -49,12 +51,13 @@ export const TodoList = () => {
 
   return (
     <FormGroup>
-      {todosData.map((toDo: TodoType) => {
+      {todosData.map((toDo: ReactQueryTodoType) => {
         return (
           <ToDoItem
             key={toDo.id}
             toDoId={toDo.id}
             text={toDo.todo}
+            completed={toDo.completed}
             deleteToDo={(id: number) => deleteTodoHandler.mutate(id)}
           />
         );

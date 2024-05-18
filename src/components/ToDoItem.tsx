@@ -4,11 +4,17 @@ import { Button, Checkbox, FormControlLabel } from "@mui/material";
 type ToDoItemProps = {
   toDoId: number;
   text: string;
+  completed: boolean;
   deleteToDo: (id: number) => void;
 };
 
-export const ToDoItem = ({ toDoId, text, deleteToDo }: ToDoItemProps) => {
-  const [isDone, setIsDone] = useState(false);
+export const ToDoItem = ({
+  toDoId,
+  text,
+  completed,
+  deleteToDo,
+}: ToDoItemProps) => {
+  const [isDone, setIsDone] = useState(completed);
 
   return (
     <div className="todo-item">
