@@ -5,7 +5,6 @@ export const fetchTodos = async () => {
   return response.json();
 };
 
-// services/todoAPI.ts
 export const deleteTodo = async (id: number) => {
   try {
     const response = await fetch(`${API_URL}/${id}`, {
@@ -17,7 +16,6 @@ export const deleteTodo = async (id: number) => {
       data: await response.json(),
     };
   } catch (error) {
-    // Throw error when fetching was unsuccessful
     console.error("Error deleting todo:", error);
     throw error;
   }
